@@ -1,23 +1,23 @@
 <?php
 namespace App\GraphQL\Resolver;
 
-use Doctrine\ORM\EntityManager;
 use Overblog\GraphQLBundle\Definition\Argument;
 use Overblog\GraphQLBundle\Definition\Resolver\AliasedInterface;
 use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
+use App\Repository\ApartmentRepository;
 
 class ApartmentResolver implements ResolverInterface, AliasedInterface {
 
-    private $em;
+    private $apartmentRepository;
 
-    public function __construct(EntityManager $em)
+    public function __construct(ApartmentRepository $apartmentRepository)
     {
-        $this->em = $em;
+        $this->apartmentRepository = $apartmentRepository;
     }
 
     public function resolve(Argument $args)
     {
-        $apartment = $this->em->getRepository('App:Apartment')->find($args['id']);
+        $apartment = $this->apartmentRepository->find($args['id']);
         return $apartment;
     }
 
