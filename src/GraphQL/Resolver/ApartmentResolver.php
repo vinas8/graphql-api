@@ -17,8 +17,7 @@ class ApartmentResolver implements ResolverInterface, AliasedInterface {
 
     public function resolve(Argument $args)
     {
-        $apartment = $this->apartmentRepository->find($args['id']);
-        return $apartment;
+        return $this->apartmentRepository->find($args['id']);
     }
 
     public static function getAliases()

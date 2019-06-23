@@ -1,0 +1,8 @@
+ApartmentInput:
+  type: relay-mutation-input
+  config:
+    fields:
+      streetAddress:
+        type: "String!"
+      apartmentId:
+        type: "Int!"
