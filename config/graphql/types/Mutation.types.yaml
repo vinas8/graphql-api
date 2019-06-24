@@ -3,9 +3,19 @@ Mutation:
   config:
     fields:
       CreateOrUpdateApartment:
-        type: Apartment!
-        resolve: "@=mutation('createOrUpdateApartment', [args['input']['streetAddress'], args['input']['apartmentId']])"
-        args:
-          #using input object type is optional, we use it here to be iso with relay mutation example.
-          input:
-            type: ApartmentInput!
+        builder: "Relay::Mutation"
+        builderConfig:
+          inputType: ApartmentInput
+          payloadType: CreateOrUpdateApartmentPayload
+          mutateAndGetPayload: "@=mutation('createOrUpdateApartment', [value['streetAddress'], value['apartmentId']])"
+
+# config/graphql/types/UpdateUserProfilePayload.type.yaml
+CreateOrUpdateApartmentPayload:
+  type: relay-mutation-payload
+  config:
+    fields:
+      # Add all needed fields for the payload depending on your business logic
+      street_address:
+        type: 'String!'
+      id:
+        type: 'Int'
